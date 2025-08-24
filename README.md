@@ -39,7 +39,7 @@ README.md
 
 ### 1. Clone repo
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/annezeal2306/MedAIClerk.git>
 cd MedAIClerk
 ```
 
