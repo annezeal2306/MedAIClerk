@@ -1,0 +1,19 @@
+# CUDA base image with Python
+FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+
+# System deps
+RUN apt-get update && apt-get install -y --no-install-recommends         python3 python3-pip git &&         rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY requirements.txt ./
+
+# Install PyTorch with CUDA wheels + libs for quantization
+RUN pip3 install --no-cache-dir --upgrade pip &&         pip3 install --no-cache-dir torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121 &&         pip3 install --no-cache-dir -r requirements.txt &&         pip3 install --no-cache-dir bitsandbytes==0.43.1
+
+COPY . .
+
+ENV PYTHONUNBUFFERED=1         PORT=8000         LLM_MODE=oss         OPENAI_MODEL=gpt-4o-mini         OSS_MODEL_ID=openai/gpt-oss-20b         OSS_DEVICE=cuda         OSS_MAX_NEW_TOKENS=512         OSS_TEMPERATURE=0.2         OSS_QUANT=4bit
+
+EXPOSE 8000
+# Use NVIDIA runtime: docker run --gpus all ...
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
