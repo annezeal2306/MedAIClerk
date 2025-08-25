@@ -39,7 +39,7 @@ README.md
 
 ### 1. Clone repo
 ```bash
-git clone <https://github.com/annezeal2306/MedAIClerk.git>
+git clone https://github.com/annezeal2306/MedAIClerk.git
 cd MedAIClerk
 ```
 
@@ -48,7 +48,7 @@ Create `.env` beside `docker-compose.yml`:
 
 #### API mode (default)
 ```env
-OPENAI_API_KEY=sk-...yourkey...
+OPENAI_API_KEY="your openai api key" (for example: sk-.....)
 LLM_MODE=api
 ```
 
@@ -118,7 +118,7 @@ curl -X POST http://localhost:8000/api/suggest-icd-codes       -H "Content-Type:
 ---
 
 ## 📹 Demo
-(Add screenshots or link to demo video here)
+(https://youtu.be/uIAxLz3TAf0)
 
 ---
 
